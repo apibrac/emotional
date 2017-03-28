@@ -62,27 +62,24 @@ $(document).ready(function(){
 
     }
   }
-  onStart();
+
+  //kick the application as soon as it is ready
+  $(document).keyup(function(e) {
+       if (e.keyCode == 27) stop();
+       if (e.keycode == 32) start();
+  });
+  start();
 });
 
-//function executes when Start button is pushed.
-function onStart() {
-  if (detector && !detector.isRunning) {
-    detector.start();
-  }
+function start() {
+  if (!detector) return;
+  if (detector.isRunning) detector.reset();
+  else detector.start();
 }
 
-//function executes when the Stop button is pushed.
-function onStop() {
+function stop() {
   if (detector && detector.isRunning) {
     detector.removeEventListener();
     detector.stop();
-  }
-};
-
-//function executes when the Reset button is pushed.
-function onReset() {
-  if (detector && detector.isRunning) {
-    detector.reset();
   }
 };
