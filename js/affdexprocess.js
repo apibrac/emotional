@@ -68,7 +68,7 @@ $(document).ready(function(){
        if (e.keyCode == 27) stop();
        if (e.keycode == 32) start();
   });
-  start();
+  //start();
 });
 
 function start() {
