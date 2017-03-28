@@ -11,11 +11,15 @@ function update(nodes){
   var circle = svg.selectAll("circle")
     .data(nodes, function(d) { return d.id; });
 
-  circle.append("circle")
-    .attr("cy", d=>d.py)
-    .attr("cx", d=>d.px)
-    .attr("r", d=>d.R)
-    .attr("fill", d=>'rgb('+~~d.r+','+~~d.g+','+~~d.b+')');
+  circle.enter()
+      .append("circle")
+    .merge(circle)
+      .attr("cy", d=>d.py)
+      .attr("cx", d=>d.px)
+      .attr("r", d=>d.R)
+      .attr("fill", d=>'rgb('+~~d.r+','+~~d.g+','+~~d.b+')');
+
+  circle.enter().append("circle")
 
   circle.exit().remove();
 }
