@@ -41,7 +41,7 @@ $(document).ready(function(){
   //The faces object contains the list of the faces detected in an image.
   //Faces object contains probabilities for all the different expressions, emotions and appearance metrics
   detector.addEventListener("onImageResultsSuccess", function(faces, image, timestamp) {
-    update(faces);
+    updateFromFaces(faces);
     faces.forEach(face=>drawFeaturePoints(image, faces[0].featurePoints));
   });
 
@@ -68,7 +68,7 @@ $(document).ready(function(){
        if (e.keyCode == 27) stop();
        if (e.keycode == 32) start();
   });
-  //start();
+  start();
 });
 
 function start() {
