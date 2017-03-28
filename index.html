@@ -4,6 +4,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 
 <script src="js/drawings.js" type="text/javascript"></script>
 
@@ -16,6 +17,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.ico">
 </head>
 <body>
+<svg width="720" height="120">
+  <circle cx="40" cy="60" r="10"></circle>
+  <circle cx="80" cy="60" r="10"></circle>
+  <circle cx="120" cy="60" r="10"></circle>
+</svg>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8" id="affdex_elements" style="width:680px;height:480px;"></div>
@@ -25,11 +31,6 @@
                 <div id="my_results"></div>
             </div>
         </div>
-    </div>
-    <div>
-        <button id="start" onclick="onStart()">Start</button>
-        <button id="stop" onclick="onStop()">Stop</button>
-        <button id="reset" onclick="onReset()">Reset</button>
     </div>
 </div>
 </body>
