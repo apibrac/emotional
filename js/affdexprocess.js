@@ -17,7 +17,7 @@ $(document).ready(function(){
   detector.addEventListener("onInitializeSuccess", function() {
     console.log("Detector initialized");
     //Display canvas instead of video feed because we want to draw the feature points on it
-    $("#face_video_canvas").css("display", "block");
+    $("#face_video_canvas").css("display", "none");
     $("#face_video").css("display", "none");
   });
 
@@ -42,20 +42,7 @@ $(document).ready(function(){
   //Faces object contains probabilities for all the different expressions, emotions and appearance metrics
   detector.addEventListener("onImageResultsSuccess", function(faces, image, timestamp) {
     update(faces);
-    $('#results').html("");
-    log('#results', "Timestamp: " + timestamp.toFixed(2));
-    log('#results', "Number of faces found: " + faces.length);
-    if (faces.length > 0) {
-      //log('#results', "Appearance: " + JSON.stringify(faces[0].appearance));
-      log('#results', "Emotions: " + JSON.stringify(faces[0].emotions, function(key, val) {
-        return val.toFixed ? Number(val.toFixed(0)) : val;
-      }));
-      log('#results', "Expressions: " + JSON.stringify(faces[0].expressions, function(key, val) {
-        return val.toFixed ? Number(val.toFixed(0)) : val;
-      }));
-      //log('#results', "Emoji: " + faces[0].emojis.dominantEmoji);
-      drawFeaturePoints(image, faces[0].featurePoints);
-    }
+    faces.forEach(face=>drawFeaturePoints(image, faces[0].featurePoints));
   });
 
   //Draw the detected facial feature points on the image
@@ -75,16 +62,12 @@ $(document).ready(function(){
 
     }
   }
+  onStart();
 });
-
-function log(node_name, msg) {
-  $(node_name).append("<span>" + msg + "</span><br />")
-}
 
 //function executes when Start button is pushed.
 function onStart() {
   if (detector && !detector.isRunning) {
-    $("#logs").html("");
     detector.start();
   }
 }
@@ -101,7 +84,5 @@ function onStop() {
 function onReset() {
   if (detector && detector.isRunning) {
     detector.reset();
-
-    $('#results').html("");
   }
 };

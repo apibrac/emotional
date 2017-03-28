@@ -1,4 +1,4 @@
 function update(faces){
-	$('#my_result').html("");
-	$('#my_result').append("<span>" + faces + "</span><br />");
+	$('#my_results').html("");
+	$('#my_results').append("<span>" + JSON.stringify(faces) + "</span><br />");
 }
