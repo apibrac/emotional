@@ -1,4 +1,5 @@
 var detector = null;
+
 $(document).ready(function(){
   // SDK Needs to create video and canvas nodes in the DOM in order to function
   // Here we are adding those nodes a predefined div.
@@ -16,8 +17,8 @@ $(document).ready(function(){
   detector.addEventListener("onInitializeSuccess", function() {
     console.log("Detector initialized");
     //Display canvas instead of video feed because we want to draw the feature points on it
-    //$("#face_video_canvas").css("display", "block");
-    //$("#face_video").css("display", "none");
+    $("#face_video_canvas").css("display", "block");
+    $("#face_video").css("display", "none");
   });
 
   //Add a callback to notify when camera access is allowed
@@ -40,6 +41,7 @@ $(document).ready(function(){
   //The faces object contains the list of the faces detected in an image.
   //Faces object contains probabilities for all the different expressions, emotions and appearance metrics
   detector.addEventListener("onImageResultsSuccess", function(faces, image, timestamp) {
+    update(faces);
     $('#results').html("");
     log('#results', "Timestamp: " + timestamp.toFixed(2));
     log('#results', "Number of faces found: " + faces.length);
