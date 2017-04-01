@@ -1,4 +1,4 @@
-var svg, 
+var svg, width, height,
 data=[], 
 force, 
 id = 0,
@@ -44,7 +44,7 @@ function addNode(n) {
 function startForce(){
   force = d3.layout.force()
     .charge(-120)
-    .size((e=>[e.width(), e.height()])($('svg')))
+    .size([width, height])
     .nodes(data)
     .on("tick", update)
     .start();
@@ -55,8 +55,8 @@ function startForce(){
 function newStep(){
   addNode((s=>({
       id: id++,
-      x: Math.random()*s.delta_r,
-      y: Math.random()*s.delta_r,
+      x: width/2 + Math.random()*s.delta_r,
+      y: height/2 + Math.random()*s.delta_r,
       r: s.red,
       g: s.green,
       b: s.blue,
@@ -88,6 +88,8 @@ function updateFromFaces(faces){
 
 $(document).ready(function(){
   svg = d3.select("svg");
+  width = $('svg').width();
+  height = $('svg').height();
 
   let ex_value = [{
       "emotions":{
