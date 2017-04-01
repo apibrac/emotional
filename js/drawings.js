@@ -1,12 +1,23 @@
 var svg;
 var data;
 var force;
+var id=0;
+var state={
+  R: 0.5,
+  theta: 0,
+  d_R: 0,
+  d_theta: 1,
+  delta_r: 100,
+  tau: 100,
+  omega: 1,
+  u: 0,
+  radius: 5,
+  red: 250,
+  blue: 0,
+  green: 0
+};
 
-function updateFromFaces(faces){
-  update(computeNodeFromFaces(faces));
-  $('#my_results').html("");
-  $('#my_results').append("<span>" + JSON.stringify(faces) + "</span><br />");
-}
+///  FORCE AND DRAWINGS
 
 function update(){
   var circle = svg.selectAll("circle")
@@ -38,6 +49,24 @@ function startForce(){
     .start();
 }
 
+/// USE OF STATE TO DRAW
+
+function newStep(){
+  addNode((s=>({
+      id: id++,
+      x: Math.random()*s.delta_r,
+      y: Math.random()*s.delta_r,
+      r: s.red,
+      g: s.green,
+      b: s.blue,
+      R: s.radius
+    }))(state));
+  setTimeout(newStep, state.tau);
+}
+
+
+/// FACES TREATMENT
+
 function computeNodeFromFaces(faces){
   return faces.map(face=>({
     id: 1, px: 60, py: 100, 
@@ -46,6 +75,13 @@ function computeNodeFromFaces(faces){
     b: face.emotions.surprise*2.5, 
     R: face.expressions.eyeWiden+5
   }));
+}
+
+
+function updateFromFaces(faces){
+  //updateStateFromFace(faces[0]);
+  $('#my_results').html("");
+  $('#my_results').append("<span>" + JSON.stringify(faces) + "</span><br />");
 }
 
 
@@ -121,8 +157,6 @@ $(document).ready(function(){
 
   startForce();
 
-    setTimeout(()=>{
-      addNode({id: 3, x: 60, y: 170, r: 0, g: 0, b: 250, R: 10});
-    }, 5000);
+  newStep();
 });
 
