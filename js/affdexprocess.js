@@ -81,5 +81,6 @@ function stop() {
   if (detector && detector.isRunning) {
     detector.removeEventListener();
     detector.stop();
+    working = false;
   }
 };
