@@ -43,7 +43,9 @@ function addNode(n) {
 
 function startForce(){
   force = d3.layout.force()
-    .charge(-120)
+    .charge(-10)
+    .friction(0.7)
+    .gravity(0.0001)
     .size([width, height])
     .nodes(data)
     .on("tick", update)
@@ -55,13 +57,14 @@ function startForce(){
 function newStep(){
   addNode((s=>({
       id: id++,
-      x: width/2 + Math.random()*s.delta_r,
-      y: height/2 + Math.random()*s.delta_r,
+      x: width/2 + Math.random()*s.delta_r + s.R*Math.sin(s.theta)*(width+height)/4,
+      y: height/2 + Math.random()*s.delta_r + s.R*Math.cos(s.theta)*(width+height)/4,
       r: s.red,
       g: s.green,
       b: s.blue,
       R: s.radius
     }))(state));
+  state.theta += state.d_theta * state.tau / 1000;
   if(working) setTimeout(newStep, state.tau);
 }
 
