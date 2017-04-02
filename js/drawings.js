@@ -12,7 +12,7 @@ state = {
   tau: 100,
   omega: 1,
   u: 0,
-  radius: 5,
+  radius: 50,
   red: 250,
   blue: 0,
   green: 0
@@ -30,6 +30,7 @@ function update(){
       .attr("cx", d=>d.x||0)
       .attr("cy", d=>d.y||0)
       .attr("r", d=>d.R)
+      .attr("mask", "url(#fade)")
       .attr("fill", d=>'rgb('+~~d.r+','+~~d.g+','+~~d.b+')');
   circle
     .exit()
