@@ -74,24 +74,30 @@ function newStep(){
 
 let changesList = {
   joy: {
-    red: 0, blue: 250, green: 0
+    red: 0, blue: 250, green: 0, tau: 100, R: 0.5, d_theta: 2
   },
-  sadness: {},
+  sadness: {
+    red: 0, blue: 250, green: 150, tau: 100, R: 0.5, d_theta: 1
+  },
   disgust: {
-    red: 250, blue: 0, green: 0
+    red: 250, blue: 0, green: 250, tau: 10, R: 0.5, d_theta: 1
   },
-  contempt: {},
-  anger: {},
-  fear: {},
+  contempt: {
+    red: 0, blue: 250, green: 250, tau: 100, R: 0.8, d_theta: 0.2
+  },
+  anger: {
+    red: 250, blue: 0, green: 0, tau: 100, R: 0.5, d_theta: 2
+  },
+  fear: {
+    red: 250, blue: 250, green: 0, tau: 10, R: 0.3, d_theta: 1
+  },
   surprise: {
-    red: 0, blue: 0, green: 250
-  },
-  valence: {},
-  engagement: {}
+    red: 0, blue: 0, green: 250, tau: 100, R: 0.5, d_theta: 1
+  }
 }
 
 function updateFromFaces(faces){
-  if(faces[0] && faces[0].emotions > 0) Object.assign(state, changesList[getMaxOf(faces[0].emotions)]);
+  if(faces[0] && faces[0].emotions) Object.assign(state, changesList[getMaxOf(faces[0].emotions)]);
   $('#my_results').html("");
   $('#my_results').append((faces[0] && faces[0].emotions) ? getMaxOf(faces[0].emotions, ["valence", "engagement"]) : "rien" +"<span>" + JSON.stringify(faces) + "</span><br />");
 }
