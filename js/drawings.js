@@ -39,7 +39,7 @@ function update(){
 
 function addNode(n) {
   data.push(n);
-  if(data.length > 1000) data.shift();
+  if(data.length > 500) data.shift();
   force.start();
 }
 
