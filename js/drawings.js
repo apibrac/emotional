@@ -72,21 +72,32 @@ function newStep(){
 
 /// FACES TREATMENT
 
-function computeNodeFromFaces(faces){
-  return faces.map(face=>({
-    id: 1, px: 60, py: 100, 
-    r: face.emotions.sadness*2.5, 
-    g: face.emotions.joy*2.5, 
-    b: face.emotions.surprise*2.5, 
-    R: face.expressions.eyeWiden+5
-  }));
+let changesList = {
+  joy: {
+    red: 0, blue: 250, green: 0
+  },
+  sadness: {},
+  disgust: {
+    red: 250, blue: 0, green: 0
+  },
+  contempt: {},
+  anger: {},
+  fear: {},
+  surprise: {
+    red: 0, blue: 0, green: 250
+  },
+  valence: {},
+  engagement: {}
 }
 
-
 function updateFromFaces(faces){
-  //updateStateFromFace(faces[0]);
+  Object.assign(state, changesList[getMaxOf(faces[0].emotions)]);
   $('#my_results').html("");
   $('#my_results').append("<span>" + JSON.stringify(faces) + "</span><br />");
+}
+
+function getMaxOf(obj){
+  return Object.keys(obj).reduce((mk, k) =>(obj[k] > obj[mk] ? k : mk), Object.keys(obj)[0]);
 }
 
 
