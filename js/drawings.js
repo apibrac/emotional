@@ -39,6 +39,7 @@ function update(){
 
 function addNode(n) {
   data.push(n);
+  if(data.length > 100) data.shift();
   force.start();
 }
 
@@ -176,9 +177,5 @@ $(document).ready(function(){
   $(document).keyup(function(e) {
        if (e.keyCode == 27) working = false;;
   });
-
-  startForce();
-
-  newStep();
 });
 

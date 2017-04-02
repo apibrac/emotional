@@ -19,6 +19,8 @@ $(document).ready(function(){
     //Display canvas instead of video feed because we want to draw the feature points on it
     $("#face_video_canvas").css("display", "block");
     $("#face_video").css("display", "none");
+    startForce();
+    newStep();
   });
 
   //Add a callback to notify when camera access is allowed
