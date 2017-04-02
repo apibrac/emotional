@@ -91,13 +91,13 @@ let changesList = {
 }
 
 function updateFromFaces(faces){
-  Object.assign(state, changesList[getMaxOf(faces[0].emotions)]);
+  if(faces[0] && faces[0].emotions > 0) Object.assign(state, changesList[getMaxOf(faces[0].emotions)]);
   $('#my_results').html("");
-  $('#my_results').append("<span>" + JSON.stringify(faces) + "</span><br />");
+  $('#my_results').append((faces[0] && faces[0].emotions) ? getMaxOf(faces[0].emotions, ["valence", "engagement"]) : "rien" +"<span>" + JSON.stringify(faces) + "</span><br />");
 }
 
-function getMaxOf(obj){
-  return Object.keys(obj).reduce((mk, k) =>(obj[k] > obj[mk] ? k : mk), Object.keys(obj)[0]);
+function getMaxOf(obj, without=[]){
+  return Object.keys(obj).reduce((mk, k) =>((without.indexOf(k) === -1 && (mk === 0 || obj[k] > obj[mk])) ? k : mk), 0);
 }
 
 
