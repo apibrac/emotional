@@ -46,8 +46,8 @@ function addNode(n) {
 function startForce(){
   force = d3.layout.force()
     .charge(-10)
-    .friction(0.7)
-    .gravity(0.0001)
+    .friction(0.6)
+    .gravity(0.0003)
     .size([width, height])
     .nodes(data)
     .on("tick", update)
@@ -75,32 +75,32 @@ function newStep(){
 
 let changesList = {
   joy: {
-    red: 0, blue: 250, green: 0, tau: 100, R: 0.5, d_theta: -1, radius: 50
+    red: 0, blue: 250, green: 0, tau: 100, R: 0.5, d_theta: -1, radius: 70
   },
   sadness: {
-    red: 0, blue: 250, green: 150, tau: 500, R: 0.8, d_theta: 2, radius: 70
+    red: 0, blue: 250, green: 150, tau: 150, R: 0.8, d_theta: 2, radius: 100
   },
   disgust: {
-    red: 250, blue: 0, green: 250, tau: 10, R: 0.5, d_theta: 1, radius: 50
+    red: 250, blue: 0, green: 250, tau: 10, R: 0.5, d_theta: 1, radius: 70
   },
   contempt: {
-    red: 0, blue: 250, green: 250, tau: 100, R: 0.8, d_theta: 0.2, radius: 50
+    red: 0, blue: 250, green: 250, tau: 100, R: 0.8, d_theta: 0.2, radius: 70
   },
   anger: {
-    red: 250, blue: 0, green: 0, tau: 100, R: 0.5, d_theta: 2, radius: 50
+    red: 250, blue: 0, green: 0, tau: 100, R: 0.5, d_theta: 2, radius: 70
   },
   fear: {
-    red: 250, blue: 250, green: 0, tau: 20, R: 0.2, d_theta: 0, radius: 20
+    red: 250, blue: 250, green: 0, tau: 20, R: 0.2, d_theta: 0, radius: 45
   },
   surprise: {
-    red: 0, blue: 0, green: 250, tau: 50, R: 0.6, d_theta: 1.5, radius: 50
+    red: 0, blue: 0, green: 250, tau: 50, R: 0.6, d_theta: 1.5, radius: 70
   }
 }
 
 function updateFromFaces(faces){
   if(faces[0] && faces[0].emotions) Object.assign(state, changesList[getMaxOf(faces[0].emotions, ["valence", "engagement"])]);
   $('#my_results').html("");
-  $('#my_results').append((faces[0] && faces[0].emotions) ? getMaxOf(faces[0].emotions, ["valence", "engagement"]) : "rien" +"<span>" + JSON.stringify(faces) + "</span><br />");
+  $('#my_results').append((faces[0] && faces[0].emotions) ? getMaxOf(faces[0].emotions, ["valence", "engagement"]) : "--");
 }
 
 function getMaxOf(obj, without=[]){
