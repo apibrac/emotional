@@ -98,7 +98,12 @@ let changesList = {
 }
 
 function updateFromFaces(faces){
-  if(faces[0] && faces[0].emotions) Object.assign(state, changesList[getMaxOf(faces[0].emotions, ["valence", "engagement"])]);
+  if(faces[0] && faces[0].emotions){
+    Object.assign(state, changesList[getMaxOf(faces[0].emotions, ["valence", "engagement"])]);
+    if(!working){working = true; newStep();}
+  }else{
+    working = false;
+  }
   $('#my_results').html("");
   $('#my_results').append((faces[0] && faces[0].emotions) ? getMaxOf(faces[0].emotions, ["valence", "engagement"]) : "--");
 }
