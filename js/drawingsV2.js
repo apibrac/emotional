@@ -39,7 +39,7 @@ function update(){
 
 function addNode(n) {
   data.push(n);
-  if(data.length > 500) data.shift();
+  if(data.length > 50) data.shift();
   force.start();
 }
 
@@ -75,16 +75,16 @@ function newStep(){
 
 let changesList = {
   joy: {
-    red: 255, blue: 18, green: 216, tau: 100, R: 0.5, d_theta: -1, radius: 70
+    red: 255, blue: 18, green: 216
   },
   sadness: {
-    red: 83, blue: 223, green: 111, tau: 150, R: 0.8, d_theta: 2, radius: 100
+    red: 83, blue: 223, green: 111
   },
   anger: {
-    red: 198, blue: 69, green: 43, tau: 100, R: 0.5, d_theta: 2, radius: 70
+    red: 198, blue: 69, green: 43
   },
   fear: {
-    red: 177, blue: 199, green: 103, tau: 20, R: 0.2, d_theta: 0, radius: 45
+    red: 177, blue: 199, green: 103
   }
 }
 
