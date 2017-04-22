@@ -1,3 +1,4 @@
+var second_per_one_tour = 6;
 var svg, width, height,
 data=[], 
 force, 
@@ -7,12 +8,12 @@ state = {
   R: 0.5,
   theta: 0,
   d_R: 0,
-  d_theta: 1,
+  d_theta: 6/second_per_one_tour,
   delta_r: 100,
-  tau: 100,
+  tau: 50,
   omega: 1,
   u: 0,
-  radius: 50,
+  radius: 100,
   red: 250,
   blue: 0,
   green: 0
@@ -39,7 +40,7 @@ function update(){
 
 function addNode(n) {
   data.push(n);
-  if(data.length > 50) data.shift();
+  if(data.length > (second_per_one_tour-1)*1000/state.tau) data.shift();
   force.start();
 }
 
